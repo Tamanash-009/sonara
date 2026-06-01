@@ -1,0 +1,7 @@
+android/
+docs/
+release/
+jdk17.zip
+*.apk
+*.aab
+*.jks

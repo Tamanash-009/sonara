@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.Sonara" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#22d3ee</item>
+        <item name="android:statusBarColor">#0b1219</item>
+        <item name="android:navigationBarColor">#0b1219</item>
+    </style>
+
+    <!-- Native Splash Screen Theme definition -->
+    <style name="Theme.Sonara.Splash" parent="Theme.Sonara">
+        <item name="android:windowBackground">#0b1219</item>
+    </style>
+</resources>

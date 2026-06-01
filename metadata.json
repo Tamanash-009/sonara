@@ -1,0 +1,6 @@
+{
+  "name": "Sonara Engine",
+  "description": "Ultra-optimized local-first audio player with cinematic motion design, personalized greetings, and native PWA performance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

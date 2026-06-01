@@ -1,0 +1,34 @@
+{
+  "project_info": {
+    "project_number": "1234567890",
+    "project_id": "sonara-music-app",
+    "storage_bucket": "sonara-music-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1234567890:android:abcdef1234567890",
+        "android_client_info": {
+          "package_name": "com.sonara.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1234567890-abcdef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDummyKeyForBuildToSucceed"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
