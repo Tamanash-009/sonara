@@ -38,6 +38,8 @@ fun MainScreen(
 ) {
     val tracks by mainViewModel.tracks.collectAsState()
     val downloadedTracks by mainViewModel.downloadedTracks.collectAsState()
+    val currentTrack by mainViewModel.currentTrack.collectAsState()
+    val isPlaying by mainViewModel.isPlaying.collectAsState()
     var selectedTab by remember { mutableStateOf<ScreenTab>(ScreenTab.Home) }
 
     Scaffold(
@@ -78,7 +80,14 @@ fun MainScreen(
                 )
         ) {
             when (selectedTab) {
-                ScreenTab.Home -> HomeScreenContent(tracks)
+                ScreenTab.Home -> HomeScreenContent(
+                    tracks = tracks,
+                    currentTrack = currentTrack,
+                    isPlaying = isPlaying,
+                    onTogglePlayPause = { mainViewModel.togglePlayPause() },
+                    onSkipNext = { mainViewModel.skipToNext() },
+                    onSkipPrevious = { mainViewModel.skipToPrevious() }
+                )
                 ScreenTab.Equalizer -> EqualizerScreenContent(equalizerViewModel)
                 ScreenTab.Downloads -> DownloadScreenContent(downloadedTracks)
             }
@@ -87,9 +96,14 @@ fun MainScreen(
 }
 
 @Composable
-fun HomeScreenContent(tracks: List<Track>) {
-    var currentPlayingTrack by remember { mutableStateOf<Track?>(tracks.firstOrNull()) }
-    var runningState by remember { mutableStateOf(false) }
+fun HomeScreenContent(
+    tracks: List<Track>,
+    currentTrack: Track?,
+    isPlaying: Boolean,
+    onTogglePlayPause: () -> Unit,
+    onSkipNext: () -> Unit,
+    onSkipPrevious: () -> Unit
+) {
 
     Column(
         modifier = Modifier
@@ -132,12 +146,12 @@ fun HomeScreenContent(tracks: List<Track>) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = currentPlayingTrack?.title ?: "No Sound Loaded",
+                    text = currentTrack?.title ?: "No Sound Loaded",
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.White
                 )
                 Text(
-                    text = currentPlayingTrack?.artist ?: "Hifi Sound Pipeline",
+                    text = currentTrack?.artist ?: "Hifi Sound Pipeline",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
@@ -151,21 +165,21 @@ fun HomeScreenContent(tracks: List<Track>) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
-                onClick = { /* Previous Item */ },
+                onClick = { onSkipPrevious() },
                 colors = IconButtonDefaults.iconButtonColors(containerColor = Color.White.copy(alpha = 0.05f))
             ) {
                 Icon(Icons.Default.List, contentDescription = "Previous", tint = Color.White)
             }
 
             Button(
-                onClick = { runningState = !runningState },
+                onClick = { onTogglePlayPause() },
                 shape = CircleShape,
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 contentPadding = PaddingValues(16.dp),
                 modifier = Modifier.size(72.dp)
             ) {
                 Icon(
-                    imageVector = if (runningState) Icons.Default.Close else Icons.Default.PlayArrow,
+                    imageVector = if (isPlaying) Icons.Default.Close else Icons.Default.PlayArrow,
                     contentDescription = "Toggle Player State",
                     tint = Color.Black,
                     modifier = Modifier.size(32.dp)
@@ -173,7 +187,7 @@ fun HomeScreenContent(tracks: List<Track>) {
             }
 
             IconButton(
-                onClick = { /* Next Item */ },
+                onClick = { onSkipNext() },
                 colors = IconButtonDefaults.iconButtonColors(containerColor = Color.White.copy(alpha = 0.05f))
             ) {
                 Icon(Icons.Default.PlayArrow, contentDescription = "Next", tint = Color.White)

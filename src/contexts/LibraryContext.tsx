@@ -390,9 +390,64 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
 
   const completeOnboarding = () => setIsOnboarded(true);
   
+  const loadDemoLibrary = async () => {
+    setIsLoading(true);
+    try {
+      const demoTracks: Track[] = [
+        {
+          id: generateId(),
+          title: "Neon Sunset",
+          artist: "Synthwave Horizon",
+          album: "Vibes 2026",
+          genre: "Synthwave",
+          duration: 300,
+          cover: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=512",
+          file: undefined,
+          path: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+          addedAt: Date.now(),
+          playCount: 0,
+          isFavorite: false
+        },
+        {
+          id: generateId(),
+          title: "Electric Dream",
+          artist: "Cyber Pulse",
+          album: "Vibes 2026",
+          genre: "Electronic",
+          duration: 300,
+          cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=512",
+          file: undefined,
+          path: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+          addedAt: Date.now(),
+          playCount: 0,
+          isFavorite: false
+        },
+        {
+          id: generateId(),
+          title: "Lofi Rain",
+          artist: "Chill Beats",
+          album: "Vibes 2026",
+          genre: "Lofi",
+          duration: 300,
+          cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=512",
+          file: undefined,
+          path: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+          addedAt: Date.now(),
+          playCount: 0,
+          isFavorite: false
+        }
+      ];
+      await saveTracks(demoTracks);
+      setTracks(prev => [...prev, ...demoTracks]);
+      completeOnboarding();
+    } catch (e) {
+      console.error("Failed to load demo library", e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const rescanLibrary = async () => {
-    // Collect all current file handles if possible, or just re-read IndexedDB
-    // For now, let's just trigger a re-enrichment of all tracks
     tracks.forEach(t => enrichTrackMetadata(t.id));
   };
 
@@ -407,7 +462,7 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     <LibraryContext.Provider value={{
       tracks, playlists, smartPlaylists, isLoading, scanProgress, importSettings, userName, isOnboarded, theme,
       setImportSettings: s => setImportSettings(p => ({ ...p, ...s })),
-      setUserName, setTheme, completeOnboarding, scanDirectory, scanFiles, rescanLibrary, loadDemoLibrary: () => {},
+      setUserName, setTheme, completeOnboarding, scanDirectory, scanFiles, rescanLibrary, loadDemoLibrary,
       updateTrackMetadata, enrichTrackMetadata, recordPlay, toggleFavorite, createPlaylist, addToPlaylist, removeFromPlaylist, deleteTracks, deletePlaylist, clearAllData
     }}>
       {children}
