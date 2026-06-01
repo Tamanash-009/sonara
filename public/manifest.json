@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "Sonara Audio Engine",
   "short_name": "Sonara",
   "description": "The ultra-optimized, high-performance audio engine for audiophiles.",
@@ -10,13 +10,13 @@
   "categories": ["music", "audio", "entertainment"],
   "icons": [
     {
-      "src": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=192&h=192",
+      "src": "/docs/assets/app_icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=512&h=512",
+      "src": "/docs/assets/app_icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -26,12 +26,13 @@
     {
       "name": "Library",
       "url": "/library",
-      "icons": [{ "src": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=96&h=96", "sizes": "96x96" }]
+      "icons": [{ "src": "/docs/assets/app_icon.png", "sizes": "96x96" }]
     },
     {
       "name": "Playlists",
       "url": "/playlists",
-      "icons": [{ "src": "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=96&h=96", "sizes": "96x96" }]
+      "icons": [{ "src": "/docs/assets/app_icon.png", "sizes": "96x96" }]
     }
   ]
 }
+
